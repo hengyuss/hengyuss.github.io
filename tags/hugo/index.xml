@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Hugo on hengyu</title>
+        <link>http://localhost:8888/tags/hugo/</link>
+        <description>Recent content in Hugo on hengyu</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Example Person</copyright>
+        <lastBuildDate>Tue, 03 Sep 2024 17:49:14 +0800</lastBuildDate><atom:link href="http://localhost:8888/tags/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Learn Hugo</title>
+        <link>http://localhost:8888/backup_page/learn-hugo/</link>
+        <pubDate>Tue, 03 Sep 2024 17:49:14 +0800</pubDate>
+        
+        <guid>http://localhost:8888/backup_page/learn-hugo/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
