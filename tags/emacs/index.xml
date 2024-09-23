@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Emacs on hengyu</title>
+        <link>http://localhost:8888/tags/emacs/</link>
+        <description>Recent content in Emacs on hengyu</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Example Person</copyright>
+        <lastBuildDate>Mon, 23 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:8888/tags/emacs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>org-test</title>
+        <link>http://localhost:8888/p/org-test/</link>
+        <pubDate>Mon, 23 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:8888/p/org-test/</guid>
+        <description>&lt;div class=&#34;ox-hugo-toc toc&#34;&gt;
+&lt;div class=&#34;heading&#34;&gt;&amp;#30446;&amp;#24405;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#test&#34; &gt;test&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!--endtoc--&gt;
+&lt;h2 id=&#34;test&#34;&gt;test
+&lt;/h2&gt;&lt;p&gt;test&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
