@@ -1,4 +1,295 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>hengyu</title><link>https://hengyuss.github.io/</link><description>Recent content on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Sat, 24 May 2025 22:25:07 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2025-5-24_无题</title><link>https://hengyuss.github.io/p/2025-5-24_%E6%97%A0%E9%A2%98/</link><pubDate>Sat, 24 May 2025 22:25:07 +0800</pubDate><guid>https://hengyuss.github.io/p/2025-5-24_%E6%97%A0%E9%A2%98/</guid><description>&lt;h2 id="该说些什么呢">该说些什么呢
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>hengyu</title><link>https://hengyuss.github.io/</link><description>Recent content on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Fri, 04 Jul 2025 11:58:40 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Day1</title><link>https://hengyuss.github.io/p/day1/</link><pubDate>Fri, 04 Jul 2025 11:58:40 +0800</pubDate><guid>https://hengyuss.github.io/p/day1/</guid><description>&lt;h1 id="cs161-概述">cs161 概述
+&lt;/h1>&lt;p>cs161是伯克利大学开设的一门关于计算机安全的课程，其中涉及了如何设计一个安全的软件系统，内存安全，密码学，网络安全等多方面内容，出于研究生所选方向与安全有关，所以我希望我能在一个月内完成这门课的学习，包括lab,project,homework等代码编写，我会将其代码上传到我个人的git仓库中,并依此系列作为我的学习笔记，一个月后提交给导师。&lt;/p>
+&lt;h2 id="cs61c-内容回顾">cs61c 内容回顾
+&lt;/h2>&lt;p>我的学习进度还没有到cs61c，对于cs61c的完整知识体系还不熟悉。但是今天的课程是关于cs61c的一个复习，如果课中提到的cs61c中的内容能够听懂的话，还是可以继续进行下去这个课的。&lt;/p>
+&lt;h3 id="x86汇编">x86汇编
+&lt;/h3>&lt;h4 id="语法格式">语法格式
+&lt;/h4>
+&lt;div class="mermaid" align="left">
+flowchart TD
+classDef common fill:#f43,stroke:#333,color:#ffffffff
+A[opcode]:::common
+B[source]:::common
+C[detination]:::common
+&lt;/div>
+&lt;h4 id="c函数调用过程">C函数调用过程
+&lt;/h4>&lt;p>函数调用过程几个重要的寄存器&lt;/p>
+&lt;ul>
+&lt;li>epb 存储栈顶信息&lt;/li>
+&lt;li>esp 存储栈低信息&lt;/li>
+&lt;li>eip 存储下一条待执行指令的内存地址&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-C" data-lang="C">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">caller&lt;/span>&lt;span class="p">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">callee&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">callee&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">local&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">42&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>对应的汇编代码&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-asm" data-lang="asm">&lt;span class="line">&lt;span class="cl">&lt;span class="nl">caller:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">push&lt;/span> &lt;span class="no">$2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">push&lt;/span> &lt;span class="no">$1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">call&lt;/span> &lt;span class="no">callee&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">add&lt;/span> &lt;span class="no">$8&lt;/span> &lt;span class="nv">%esp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nl">callee:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">push&lt;/span> &lt;span class="nv">%ebp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="nv">%esp&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">%ebp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">sub&lt;/span> &lt;span class="no">$4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">%esp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="no">$42&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="no">$eax&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="nv">%ebp&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">%esp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">pop&lt;/span> &lt;span class="no">$ebp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">ret&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>以上述代码为例子&lt;/p>
+&lt;p>
+&lt;div class="mermaid" align="left">
+flowchart LR
+subgraph caller_stack_frame ["function stack memory graph"]
+direction TB
+A[caller stack frame]
+B[ ]
+C[ ]
+D[ ]
+E[ ]
+end
+EBP((("EBP"))) --> A
+ESP((("ESP"))) --> A
+style caller_stack_frame #stroke:#333
+style EBP stroke:#222
+style ESP stroke:#222`
+&lt;/div>
+初始位置时esp和ebp指向同一地址,随后caller函数将立即数1,2压入栈中，esp作为栈低向下生长，此时eip指向call callee即即将开始调用callee&lt;/p>
+&lt;div class="mermaid" align="left">
+flowchart LR
+subgraph caller_stack_frame ["function stack memory graph"]
+direction TB
+A[caller stack frame]
+B[1]
+C[2]
+D[ ]
+E[ ]
+end
+EBP((("EBP"))) --> A
+ESP((("ESP"))) --> C
+style caller_stack_frame #stroke:#333
+style EBP stroke:#222
+style ESP stroke:#222`
+&lt;/div>
+&lt;p>随后进入调用callee的过程中,此时要为callee函数申请新的o栈,在此之前要保存之前eip将要执行的代码的地址，执行完call callee进入调用callee函数，那么返回后的地址就应该是add $8, %esp(参考上述caller中的汇编代码),这个地址也保存在栈中，即将add &amp;amp;8, %esp这段代码的地址压入栈中，方便从callee函数返回后，cpu知道从哪继续执行。&lt;/p>
+&lt;div class="mermaid" align="left">
+flowchart LR
+subgraph caller_stack_frame ["function stack memory graph"]
+direction TB
+A[caller stack frame]
+B[1]
+C[2]
+D[address of add $8, %esp]
+E[ ]
+end
+EBP((("EBP"))) --> A
+ESP((("ESP"))) --> D
+D --> address((("add $8, %esp")))
+style caller_stack_frame #stroke:#333
+style EBP stroke:#222
+style ESP stroke:#222`
+&lt;/div>
+&lt;p>接下来要将原来的栈顶地址入栈，因为接下来的栈就是callee的栈了
+&lt;div class="mermaid" align="left">
+flowchart LR
+subgraph caller_stack_frame ["function stack memory graph"]
+direction TB
+A[caller stack frame]
+B[1]
+C[2]
+D[address of add $8, %esp]
+E[address of caller stack frame ]
+end
+direction TB
+EBP((("EBP"))) --> ESP((("ESP"))) -->E
+D --> address1((("add $8, %esp")))
+style caller_stack_frame #stroke:#333
+style EBP stroke:#222
+style ESP stroke:#222`
+&lt;/div>&lt;/p>
+&lt;p>在执行callee的过程和caller类似，这里我们主要说执行callee后的返回过程.在callee中可以看到 pop %ebp，是将栈低 caller stack frame的地址也就是原来caller的栈顶地址弹入到ebp中，然后此时esp就指向了address of add %8, %esp&lt;/p>
+&lt;div class="mermaid" align="left">
+flowchart LR
+subgraph caller_stack_frame ["function stack memory graph"]
+direction TB
+A[caller stack frame]
+B[1]
+C[2]
+D[address of add $8, %esp]
+E[ ]
+end
+direction TB
+EBP((("EBP"))) --> A
+ESP((("ESP"))) --> D
+D --> address1((("add $8, %esp")))
+style caller_stack_frame #stroke:#333
+style EBP stroke:#222
+style ESP stroke:#222`
+&lt;/div>
+&lt;p>在然后执行ret 汇编代码，将esp所指向的内存地址弹入到eip中也就是add $8, %esp这条命令,cpu 开始从这条命令执行，这条命令的意思就是将esp向上再升两个刚好跨过两个参数1,2的内存地址，epb=esp此时栈就被释放了。(为什么是add $8, %esl, 因为我们说的是32位的系统，每个内存地址是32位也就是4个字节，1,2两个参数分别占一个内存地址因此是两个内存地址也就是8个字节)
+&lt;div class="mermaid" align="left">
+flowchart LR
+subgraph caller_stack_frame ["function stack memory graph"]
+direction TB
+A[ ]
+B[ ]
+C[ ]
+D[ ]
+E[ ]
+end
+direction TB
+EBP((("EBP"))) --> ESP((("ESP"))) -->
+D --> address1((("add $8, %esp")))
+style caller_stack_frame #stroke:#333
+style EBP stroke:#222
+style ESP stroke:#222`
+&lt;/div>&lt;/p>
+&lt;h3 id="额外知识">额外知识
+&lt;/h3>&lt;p>在写博客的途中学到的知识&lt;/p>
+&lt;h4 id="hugo集成mermaid">hugo集成mermaid
+&lt;/h4>&lt;p>我使用的是hugo-theme-stack主题，如果要使用mermaid，我在网上找了很多方法，其中比较有用的是在shortcode目录下添加mermaid.html文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{{ $_hugo_config := `{ &amp;#34;version&amp;#34;: 1 }` }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;mermaid&amp;#34;&lt;/span> &lt;span class="na">align&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{ if .Get &amp;#34;&lt;/span>&lt;span class="na">align&lt;/span>&lt;span class="err">&amp;#34;&lt;/span> &lt;span class="err">}}{{&lt;/span> &lt;span class="err">.&lt;/span>&lt;span class="na">Get&lt;/span> &lt;span class="err">&amp;#34;&lt;/span>&lt;span class="na">align&lt;/span>&lt;span class="err">&amp;#34;&lt;/span> &lt;span class="err">}}{{&lt;/span> &lt;span class="na">else&lt;/span> &lt;span class="err">}}&lt;/span>&lt;span class="na">center&lt;/span>&lt;span class="err">{{&lt;/span> &lt;span class="na">end&lt;/span> &lt;span class="err">}}&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>{{ safeHTML .Inner }}&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>将上方代码复制进入该文件&lt;/p>
+&lt;p>第二步&lt;br>
+在partials目录下的footer或者head目录下，将footer.html中的内容粘贴进custom.html中并添加以下代码&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="nx">mermaid&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">initialize&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">startOnLoad&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">securityLevel&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;loose&amp;#39;&lt;/span>&lt;span class="p">}});&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>custom.html完整代码如下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">{{- $ThemeVersion := &amp;#34;3.30.0&amp;#34; -}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">footer&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;site-footer&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="nx">mermaid&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">initialize&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="nx">startOnLoad&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">securityLevel&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;loose&amp;#39;&lt;/span>&lt;span class="p">}});&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">section&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;copyright&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="ni">&amp;amp;copy;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format &amp;#34;2006&amp;#34;))) }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ .Site.Params.footer.since }} -
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ end }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ now.Format &amp;#34;2006&amp;#34; }} {{ default .Site.Title .Site.Copyright }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">section&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">section&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;powerby&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ with .Site.Params.footer.customText }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ . | safeHTML }} &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">br&lt;/span>&lt;span class="p">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ end }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- $Generator := `&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">a&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://gohugo.io/&amp;#34;&lt;/span> &lt;span class="na">target&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;_blank&amp;#34;&lt;/span> &lt;span class="na">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;noopener&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Hugo&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">a&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>` -}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- $Theme := printf `&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">b&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;&lt;/span>&lt;span class="nt">a&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://github.com/CaiJimmy/hugo-theme-stack&amp;#34;&lt;/span> &lt;span class="na">target&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;_blank&amp;#34;&lt;/span> &lt;span class="na">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;noopener&amp;#34;&lt;/span> &lt;span class="na">data-version&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;%s&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Stack&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">a&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">b&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>` $ThemeVersion -}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{- $DesignedBy := `&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">a&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://jimmycai.com&amp;#34;&lt;/span> &lt;span class="na">target&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;_blank&amp;#34;&lt;/span> &lt;span class="na">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;noopener&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Jimmy&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">a&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>` -}}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ T &amp;#34;footer.builtWith&amp;#34; (dict &amp;#34;Generator&amp;#34; $Generator) | safeHTML }} &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">br&lt;/span> &lt;span class="p">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ T &amp;#34;footer.designedBy&amp;#34; (dict &amp;#34;Theme&amp;#34; $Theme &amp;#34;DesignedBy&amp;#34; $DesignedBy) | safeHTML }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">section&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">footer&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="git-submodule">git submodule
+&lt;/h4>&lt;p>如果在项目中引入了其他项目的仓库，如果要对这个仓库做一些更改，我们可以在本地进行修改，但如果要提交到远端仓库就没有办法了，我们可以将这个仓库fork到我们的仓库中去，然后修改父项目中的.gitmodule中该项目的url
+例如&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[submodule &amp;#34;themes/hugo-theme-stack&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> path = themes/hugo-theme-stack
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> url = https://github.com/hengyuss/hugo-theme-stack.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>2025-5-24_无题</title><link>https://hengyuss.github.io/p/2025-5-24_%E6%97%A0%E9%A2%98/</link><pubDate>Sat, 24 May 2025 22:25:07 +0800</pubDate><guid>https://hengyuss.github.io/p/2025-5-24_%E6%97%A0%E9%A2%98/</guid><description>&lt;h2 id="该说些什么呢">该说些什么呢
 &lt;/h2>&lt;p>我也不知道该说些什么，但是我得每天记一点什么东西了。过年的时候和朋友说了今年的目标是每三天写一篇博客，但是现在都五月二十四了，哦不，我写这片文章的时候已经是五月二十五了。那就从今天开始吧。每天的碎碎念什么的都记录一下，毕竟这样可以适当的督促一下自己，现在的状态完全不如去年五月份的状态(如果去年是现在的状态，那我肯定是没学上了)。&lt;/p>
 &lt;h2 id="物理代课">物理代课
 &lt;/h2>&lt;p>五月九号的时候来洛阳做家教了，刚开始代课的时候确实有点害怕，害怕自己带不好课，但是自己毕竟之前在家也给侄女带过数学，多多少少还是有点底气的，不过，那是没有备课的。现在辅导的学生都是面临高考的，而且人家是付费的，本着负责的态度，我重新拿起了高中的物理资料开始做题，没想到东西还是挺多的，幸运的是，有之前的基础，拾起来快多了，而且，做题的过程比高中时期更加通顺，难道这就是知识的滞后性？通过给学生讲解，感觉自己的高中物理更加通透了，这种方式跟费曼学习法是一样的吧，确实有用，之后的学习过程应该逼迫自己去践行这种学习法则，提高自己的效率。&lt;/p>
