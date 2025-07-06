@@ -1,4 +1,228 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on hengyu</title><link>https://hengyuss.github.io/post/</link><description>Recent content in Posts on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Fri, 04 Jul 2025 11:58:40 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Day1</title><link>https://hengyuss.github.io/p/day1/</link><pubDate>Fri, 04 Jul 2025 11:58:40 +0800</pubDate><guid>https://hengyuss.github.io/p/day1/</guid><description>&lt;h1 id="cs161-概述">cs161 概述
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on hengyu</title><link>https://hengyuss.github.io/post/</link><description>Recent content in Posts on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Sat, 05 Jul 2025 22:35:13 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>cs161Day2</title><link>https://hengyuss.github.io/p/cs161day2/</link><pubDate>Sat, 05 Jul 2025 22:35:13 +0800</pubDate><guid>https://hengyuss.github.io/p/cs161day2/</guid><description>&lt;h2 id="关于c的一些安全问题">关于C的一些安全问题
+&lt;/h2>&lt;p>我对于C语言的应用仅限于做南大的PA1,而且很多C的API我也不是很熟悉，对于C的一些安全性问题的了解更是无从提起了。
+今天学习的cs161的课程中提及了一些C中的安全性问题，其中主要的是&lt;strong>C对于内存没有边界检查&lt;/strong>&lt;/p>
+&lt;h3 id="c的栈溢出">C的栈溢出
+&lt;/h3>&lt;p>C中有很多不安全的函数，这些不安全的函数大多数都和没有边界检查有关。有一个典型的例子是gets()函数。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-C" data-lang="C">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">vulnerable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">char&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">gets&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>它|的内存布局大概是&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: center">address&lt;/th>
+&lt;th style="text-align: center">value&lt;/th>
+&lt;th style="text-align: center">说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd58&lt;/td>
+&lt;td style="text-align: center">RIP of vulnerable&lt;/td>
+&lt;td style="text-align: center">vulnerable 的 EIP 的值&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd54&lt;/td>
+&lt;td style="text-align: center">SFP of vulnerable&lt;/td>
+&lt;td style="text-align: center">vulnerable 的EBP 的值&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd50&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd4c&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd48&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd44&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd40&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>因为C没有边界检查，用户通过gets()函数输入字符串，即使超过了name[20],C也不会组织用户的继续输出，所以用户就可以覆盖vulnerable这个函数的EIP的值，因为RIP of vulnerable就是从vulnerable返回之后，所执行的指令的地址，如果这个地址被覆盖成了一个恶意程序的地址，那么，计算机就会执行这个恶意程序，可能会被入侵，做各种危险的操作，比如如果在这里放入一段shellcode的代码地址，那么就会打开一个shell,入侵者可以通过这个shell执行各种命令。&lt;br>
+那么shellcode如何放入内存中呢，同样可以利用gets()这个函数的漏洞，将shellcode汇编成机器语言后，通过gets()输入到栈中，在覆盖RIP of vulnerable的时候让其指向这个地址就行.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: center">address&lt;/th>
+&lt;th style="text-align: center">value&lt;/th>
+&lt;th style="text-align: center">说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd58&lt;/td>
+&lt;td style="text-align: center">0xbffcd40&lt;/td>
+&lt;td style="text-align: center">shellcode的地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd54&lt;/td>
+&lt;td style="text-align: center">对齐填充&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd50&lt;/td>
+&lt;td style="text-align: center">对齐填充&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd4c&lt;/td>
+&lt;td style="text-align: center">对齐填充&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd48&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd44&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd40&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>如果我们所要执行的代码大于这个函数分配的栈空间呢，该怎么放shellcode呢？ 我们之前说过C是没有边界检查的,利用gets()这个函数，只要用户不停的输入，有内存空间的话，这个输入可以一直沿着栈向上填充&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: center">address&lt;/th>
+&lt;th style="text-align: center">value&lt;/th>
+&lt;th style="text-align: center">说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">shellcode&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd58&lt;/td>
+&lt;td style="text-align: center">0xbffcd40&lt;/td>
+&lt;td style="text-align: center">shellcode的地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd54&lt;/td>
+&lt;td style="text-align: center">对齐填充&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd50&lt;/td>
+&lt;td style="text-align: center">对齐填充&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd4c&lt;/td>
+&lt;td style="text-align: center">对齐填充&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd48&lt;/td>
+&lt;td style="text-align: center">对齐填充&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd44&lt;/td>
+&lt;td style="text-align: center">对齐填充&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">0xbfffcd40&lt;/td>
+&lt;td style="text-align: center">对齐填充&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>类似这样。
+关于函数的调用过程，我在上一篇cs161的学习记录中已经谈过了。&lt;/p>
+&lt;h3 id="c的数字溢出">C的数字溢出
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-C" data-lang="C">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">char&lt;/span> &lt;span class="n">buf&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">64&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">lenk&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">64&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">memcpy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nf">memcpy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">void&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">dest&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">src&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">size_t&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这个函数的不安全在于func传入的是int类型的数字， 但是memcpy函数中size_t是一个无符号数&lt;br>
+考虑这样一个例子，如果我调用func(-1, data)这个-1不会通过if(len &amp;gt; 64) 进而执行到memcpy这个函数，那么在memcpy这个函数中就会将-1解释为对应的无符号数也就是0xffffffff这是最大的无符号数了,这样就会造成程序的漏洞出现。&lt;/p>
+&lt;h3 id="题外话">题外话
+&lt;/h3>&lt;p>这几天早上老是起不来，自己在屋子里的效率不是很高，群里发的leetcode的第一次测试也是拖到最后才做，本来是两个半小时，我做的时候距离截至时间已经只剩一个半小时了。。。大意了，今天还被师姐提醒了一下，我以为到晚上12点结束呢，没想到是11点。leetcode也有很长时间不刷了，做起来手生的不得了,这个东西还是得继续刷起来了。。。本来之前没考研的时候就在想如果我考上研了还要每天一道leetcode,刷三年。明天继续学习cs161,现在cs161刚开始，后边还有对应的hw,lab和project要做。&lt;/p></description></item><item><title>cs161Day1</title><link>https://hengyuss.github.io/p/cs161day1/</link><pubDate>Fri, 04 Jul 2025 11:58:40 +0800</pubDate><guid>https://hengyuss.github.io/p/cs161day1/</guid><description>&lt;h1 id="cs161-概述">cs161 概述
 &lt;/h1>&lt;p>cs161是伯克利大学开设的一门关于计算机安全的课程，其中涉及了如何设计一个安全的软件系统，内存安全，密码学，网络安全等多方面内容，出于研究生所选方向与安全有关，所以我希望我能在一个月内完成这门课的学习，包括lab,project,homework等代码编写，我会将其代码上传到我个人的git仓库中,并依此系列作为我的学习笔记，一个月后提交给导师。&lt;/p>
 &lt;h2 id="cs61c-内容回顾">cs61c 内容回顾
 &lt;/h2>&lt;p>我的学习进度还没有到cs61c，对于cs61c的完整知识体系还不熟悉。但是今天的课程是关于cs61c的一个复习，如果课中提到的cs61c中的内容能够听懂的话，还是可以继续进行下去这个课的。&lt;/p>
@@ -168,24 +392,7 @@ style caller_stack_frame #stroke:#333
 style EBP stroke:#222
 style ESP stroke:#222`
 &lt;/div>
-&lt;p>在然后执行ret 汇编代码，将esp所指向的内存地址弹入到eip中也就是add $8, %esp这条命令,cpu 开始从这条命令执行，这条命令的意思就是将esp向上再升两个刚好跨过两个参数1,2的内存地址，epb=esp此时栈就被释放了。(为什么是add $8, %esl, 因为我们说的是32位的系统，每个内存地址是32位也就是4个字节，1,2两个参数分别占一个内存地址因此是两个内存地址也就是8个字节)
-&lt;div class="mermaid" align="left">
-flowchart LR
-subgraph caller_stack_frame ["function stack memory graph"]
-direction TB
-A[ ]
-B[ ]
-C[ ]
-D[ ]
-E[ ]
-end
-direction TB
-EBP((("EBP"))) --> ESP((("ESP"))) -->
-D --> address1((("add $8, %esp")))
-style caller_stack_frame #stroke:#333
-style EBP stroke:#222
-style ESP stroke:#222`
-&lt;/div>&lt;/p>
+&lt;p>在然后执行ret 汇编代码，将esp所指向的内存地址弹入到eip中也就是add $8, %esp这条命令,cpu 开始从这条命令执行，这条命令的意思就是将esp向上再升两个刚好跨过两个参数1,2的内存地址，epb=esp此时栈就被释放了。(为什么是add $8, %esl, 因为我们说的是32位的系统，每个内存地址是32位也就是4个字节，1,2两个参数分别占一个内存地址因此是两个内存地址也就是8个字节)&lt;/p>
 &lt;h3 id="额外知识">额外知识
 &lt;/h3>&lt;p>在写博客的途中学到的知识&lt;/p>
 &lt;h4 id="hugo集成mermaid">hugo集成mermaid
