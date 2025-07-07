@@ -1,4 +1,711 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cs161 on hengyu</title><link>https://hengyuss.github.io/tags/cs161/</link><description>Recent content in Cs161 on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Sat, 05 Jul 2025 22:35:13 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/tags/cs161/index.xml" rel="self" type="application/rss+xml"/><item><title>cs161Day2</title><link>https://hengyuss.github.io/p/cs161day2/</link><pubDate>Sat, 05 Jul 2025 22:35:13 +0800</pubDate><guid>https://hengyuss.github.io/p/cs161day2/</guid><description>&lt;h2 id="关于c的一些安全问题">关于C的一些安全问题
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cs161 on hengyu</title><link>https://hengyuss.github.io/tags/cs161/</link><description>Recent content in Cs161 on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Mon, 07 Jul 2025 16:01:06 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/tags/cs161/index.xml" rel="self" type="application/rss+xml"/><item><title>cs161Day3</title><link>https://hengyuss.github.io/p/cs161day3/</link><pubDate>Mon, 07 Jul 2025 16:01:06 +0800</pubDate><guid>https://hengyuss.github.io/p/cs161day3/</guid><description>&lt;h2 id="溢出漏洞">溢出漏洞
+&lt;/h2>&lt;p>今天的课程仍然是关于C的一些栈内存的安全性问o题&lt;/p>
+&lt;h3 id="关于printf函数的漏洞">关于printf()函数的漏洞
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-C" data-lang="C">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">vodi&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">secret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">42&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>C中的printf函数的第一个参数格外重要，第一个参数是格式化字符串，如果在这个字符串中遇到%d,%s,这些格式化输入，printf就会在栈上找到第一个未使用的变量进行匹配，然后进行输出。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>frame&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>RIP of func&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SFP of func&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>secret = 42&lt;/td>
+&lt;td>arg1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;amp;&amp;quot;%d\n&amp;quot;&lt;/td>
+&lt;td>arg0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RIP of printf&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SFP of printf&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>printf frame&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>在这个栈帧中，printf函数就会找到arg1也就是secret = 42这个变量进行输出&lt;/p>
+&lt;h3 id="off-by-one一字节溢出">off-by-one(一字节溢出)
+&lt;/h3>&lt;p>通过这个溢出漏洞我们可以复习一下C函数的调用过程，仅仅是一个字节的溢出就让计算机处于危险的境地&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-C" data-lang="C">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">vulnerable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">char&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">fread&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">21&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">stdin&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">vulnerable&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-asm" data-lang="asm">&lt;span class="line">&lt;span class="cl">&lt;span class="nl">vulnerable:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">call&lt;/span> &lt;span class="no">gets&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">add&lt;/span> &lt;span class="no">$4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">%esp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="nv">%ebp&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">%esp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">pop&lt;/span> &lt;span class="nv">%ebp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">ret&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nl">main:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">call&lt;/span> &lt;span class="no">vulnerable&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="nv">%ebp&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">%esp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">pop&lt;/span> &lt;span class="nv">%ebp&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">ret&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>address&lt;/th>
+&lt;th>value&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd64&lt;/td>
+&lt;td>RIP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd60&lt;/td>
+&lt;td>SFP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd5c&lt;/td>
+&lt;td>RIP of vulnerable&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>EBP-&amp;gt;&lt;/td>
+&lt;td>0xbfffcd58&lt;/td>
+&lt;td>SFP of vulnerable&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd54&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd50&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd4c&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd48&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd44&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ESP-&amp;gt;&lt;/td>
+&lt;td>0xbfffcd40&lt;/td>
+&lt;td>&amp;hellip;&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>在这个栈中name数组占20个字节，但是fread允许我们从输入21个字节进入栈当中，因为栈上分配的name数组只有20个字节，那么溢出的那一个字节就会被写进保存的上一个栈的EBP的值中，这样在该函数返回的时候EBP被指向到错误的内存地址，因为ESP的值是没有保存在栈中的，返回到上一个函数栈中的ESP的位置依赖于EBP，而EIP是通过ESP的位置从栈中弹出保存的从函数返回后继续执行的代码的地址，所以这样我们就可更改EIP的位置，进而执行一些恶意代码。让我们从图中看一看&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>address&lt;/th>
+&lt;th>value&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd64&lt;/td>
+&lt;td>RIP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd60&lt;/td>
+&lt;td>SFP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd5c&lt;/td>
+&lt;td>RIP of vulnerable&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>EBP-&amp;gt;&lt;/td>
+&lt;td>0xbfffcd58&lt;/td>
+&lt;td>&lt;code>\x60&lt;/code> \xff \xff \xbf&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd54&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd50&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd4c&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd48&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd44&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ESP-&amp;gt;&lt;/td>
+&lt;td>0xbfffcd40&lt;/td>
+&lt;td>&amp;hellip;&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>通过这个字节的溢出我们将保存的EBP的地址进行了改变从
+0xbfffff60 变为了 0xbfffff44&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>address&lt;/th>
+&lt;th>value&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd64&lt;/td>
+&lt;td>RIP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd60&lt;/td>
+&lt;td>SFP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd5c&lt;/td>
+&lt;td>RIP of vulnerable&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>EBP-&amp;gt;&lt;/td>
+&lt;td>0xbfffcd58&lt;/td>
+&lt;td>&lt;code>\x44&lt;/code> \xcd \xff \xbf&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd54&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd50&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd4c&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd48&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd44&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ESP-&amp;gt;&lt;/td>
+&lt;td>0xbfffcd40&lt;/td>
+&lt;td>&amp;hellip;&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>现在我们要从vulnerable函数返回，那么就是要将这个栈给删除掉，只用mov %ebp, %esp&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>address&lt;/th>
+&lt;th>value&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd64&lt;/td>
+&lt;td>RIP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd60&lt;/td>
+&lt;td>SFP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd5c&lt;/td>
+&lt;td>RIP of vulnerable&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>EBP-&amp;gt; ESP -&amp;gt;&lt;/td>
+&lt;td>0xbfffcd58&lt;/td>
+&lt;td>&lt;code>\x44&lt;/code> \xcd \xff \xbf&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd54&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd50&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd4c&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd48&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd44&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd40&lt;/td>
+&lt;td>&amp;hellip;&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>这个时候ESP一下的数据相当于被逻辑删除了，也就是空闲了出来，随后pop %esp, ret， 分别将EBP指向地址为0xbfffcd44的内存而且ESP在弹栈上移后将其位置的值弹入EIP中，这个地方的值似乎我们并不能更改来让它指向恶意代码的位置。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>address&lt;/th>
+&lt;th>value&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd64&lt;/td>
+&lt;td>RIP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd60&lt;/td>
+&lt;td>SFP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ESP-&amp;gt;&lt;/td>
+&lt;td>0xbfffcd5c&lt;/td>
+&lt;td>RIP of vulnerable&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd58&lt;/td>
+&lt;td>&lt;code>\x44&lt;/code> \xcd \xff \xbf&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd54&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd50&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd4c&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd48&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>EBP-&amp;gt;&lt;/td>
+&lt;td>0xbfffcd44&lt;/td>
+&lt;td>name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>0xbfffcd40&lt;/td>
+&lt;td>&amp;hellip;&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>但是从vulnerable函数返回后紧接着是main函数的返回处理，可以看到从vulnerable返回后，在main函数中开始执行
+mov %ebp, %esp&lt;/p>
+&lt;p>这段name数组是我在vulnerable函数中申请的栈空间，我们在执行vulnerable函数的时候就可以对这些内存做一些更改,我们只用在输入的时候将0xbfffcd48这个地方的值改为恶意代码的地址。在随后的函数返回过程中，最终EIP就会指向这个地方，进而去执行恶意代码。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: center">&lt;/th>
+&lt;th>address&lt;/th>
+&lt;th style="text-align: center">value&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd64&lt;/td>
+&lt;td style="text-align: center">RIP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd60&lt;/td>
+&lt;td style="text-align: center">SFP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd5c&lt;/td>
+&lt;td style="text-align: center">RIP of vulnerable&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd58&lt;/td>
+&lt;td style="text-align: center">&lt;code>\x44&lt;/code> \xcd \xff \xbf&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd54&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd50&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd4c&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd48&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">EBP-&amp;gt;ESP -&amp;gt;&lt;/td>
+&lt;td>0xbfffcd44&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd40&lt;/td>
+&lt;td style="text-align: center">&amp;hellip;&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>通过pop %ebp将 esp的位置上移，执行的下条命令ret就是将这个位置的值当作将要返回的地址，也就是从函数返回后要执行的指令位置,ret将esp处的值弹入到eip中。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: center">&lt;/th>
+&lt;th>address&lt;/th>
+&lt;th style="text-align: center">value&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd64&lt;/td>
+&lt;td style="text-align: center">RIP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd60&lt;/td>
+&lt;td style="text-align: center">SFP of main&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd5c&lt;/td>
+&lt;td style="text-align: center">RIP of vulnerable&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd58&lt;/td>
+&lt;td style="text-align: center">&lt;code>\x44&lt;/code> \xcd \xff \xbf&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd54&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd50&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd4c&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">ESP-&amp;gt;&lt;/td>
+&lt;td>0xbfffcd48&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd44&lt;/td>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td>0xbfffcd40&lt;/td>
+&lt;td style="text-align: center">&amp;hellip;&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>那么此时这个ESP位置的值我们就可以将其改为恶意代码的地址，这样函数返回后就能会执行恶意代码了。&lt;/p>
+&lt;h3 id="刷题">刷题
+&lt;/h3>&lt;p>又要开始每天刷题了，因为cs161的project2要用到GO,所以之后的刷题语言就选为GO了，熟悉一下语言。今天先复习了一下二分查找，用的GO。等之后做的题目难度上去了再单独写刷题的复盘吧，以前刷题一直没有复盘过，所以很容易遗忘而且掌握的也不太行。&lt;/p></description></item><item><title>cs161Day2</title><link>https://hengyuss.github.io/p/cs161day2/</link><pubDate>Sat, 05 Jul 2025 22:35:13 +0800</pubDate><guid>https://hengyuss.github.io/p/cs161day2/</guid><description>&lt;h2 id="关于c的一些安全问题">关于C的一些安全问题
 &lt;/h2>&lt;p>我对于C语言的应用仅限于做南大的PA1,而且很多C的API我也不是很熟悉，对于C的一些安全性问题的了解更是无从提起了。
 今天学习的cs161的课程中提及了一些C中的安全性问题，其中主要的是&lt;strong>C对于内存没有边界检查&lt;/strong>&lt;/p>
 &lt;h3 id="c的栈溢出">C的栈溢出
