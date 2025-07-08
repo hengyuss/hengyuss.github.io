@@ -481,12 +481,9 @@
 &lt;td>&lt;/td>
 &lt;td>&amp;amp;name&lt;/td>
 &lt;/tr>
-&lt;tr>
-&lt;td>通过这样循环往复就可以执行我们想要执行的指令序列&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
 &lt;/tbody>
 &lt;/table>
+&lt;p>通过这样循环往复就可以执行我们想要执行的指令序列&lt;/p>
 &lt;h2 id="防御">防御
 &lt;/h2>&lt;p>谈完了攻击，我们该来讲一讲如何进行一些防御措施.&lt;/p>
 &lt;h3 id="金丝雀">金丝雀
@@ -575,7 +572,10 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">...&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>例如上述代码，如果nop足够多的话，那么就算栈移动了，之前攻击者修改的那个跳转地址有可能就是这些nop空指令中的一个，如果恰好是某一个空指令的话，程序就会顺着执行下去，也就一定会执行到恶意代码。&lt;/p></description></item><item><title>cs161Day3</title><link>https://hengyuss.github.io/p/cs161day3/</link><pubDate>Mon, 07 Jul 2025 16:01:06 +0800</pubDate><guid>https://hengyuss.github.io/p/cs161day3/</guid><description>&lt;h2 id="溢出漏洞">溢出漏洞
+&lt;/div>&lt;p>例如上述代码，如果nop足够多的话，那么就算栈移动了，之前攻击者修改的那个跳转地址有可能就是这些nop空指令中的一个，如果恰好是某一个空指令的话，程序就会顺着执行下去，也就一定会执行到恶意代码。&lt;/p>
+&lt;h2 id="题外话">题外话
+&lt;/h2>&lt;p>今天因为要回家办一些事，在路上耽误了很长时间，勉强看了一节课(虽然我之前也只是一天一节课)。新买的笔记本也到了，明天就把笔记本装上arch,把数据同步一下，我就可以拿着笔记本去图书馆学了，自己在屋子里效率实在是太低了。&lt;br>
+明天可以开始做cs161的project1了!。&lt;/p></description></item><item><title>cs161Day3</title><link>https://hengyuss.github.io/p/cs161day3/</link><pubDate>Mon, 07 Jul 2025 16:01:06 +0800</pubDate><guid>https://hengyuss.github.io/p/cs161day3/</guid><description>&lt;h2 id="溢出漏洞">溢出漏洞
 &lt;/h2>&lt;p>今天的课程仍然是关于C的一些栈内存的安全性问o题&lt;/p>
 &lt;h3 id="关于printf函数的漏洞">关于printf()函数的漏洞
 &lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
