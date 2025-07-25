@@ -2040,7 +2040,23 @@ style ESP stroke:#222`
 &lt;/ul>
 &lt;p>相信慢慢的会有提高的,我的markdown编辑水平还真的是有待提高。&lt;/p></description></item><item><title>Test</title><link>https://hengyuss.github.io/p/test/</link><pubDate>Tue, 03 Sep 2024 22:51:19 +0800</pubDate><guid>https://hengyuss.github.io/p/test/</guid><description>&lt;h3 id="test">test
 &lt;/h3>&lt;h4 id="test1">test1
-&lt;/h4></description></item><item><title>Learn Hugo</title><link>https://hengyuss.github.io/posts/learn-hugo/</link><pubDate>Tue, 03 Sep 2024 17:43:01 +0800</pubDate><guid>https://hengyuss.github.io/posts/learn-hugo/</guid><description/></item><item><title>Archives</title><link>https://hengyuss.github.io/archives/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>https://hengyuss.github.io/archives/</guid><description/></item><item><title>Links</title><link>https://hengyuss.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hengyuss.github.io/links/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
+&lt;/h4></description></item><item><title>Learn Hugo</title><link>https://hengyuss.github.io/posts/learn-hugo/</link><pubDate>Tue, 03 Sep 2024 17:43:01 +0800</pubDate><guid>https://hengyuss.github.io/posts/learn-hugo/</guid><description/></item><item><title>Archives</title><link>https://hengyuss.github.io/archives/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>https://hengyuss.github.io/archives/</guid><description/></item><item><title/><link>https://hengyuss.github.io/p/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hengyuss.github.io/p/</guid><description>&lt;h2 id="project2初始准备">project2初始准备
+&lt;/h2>&lt;p>前天已经开始了cs161-project2的准备，首先是找到了&lt;a class="link" href="https://github.com/cs161-staff" target="_blank" rel="noopener"
+>project2的框架代码地址&lt;/a> 和要参考的&lt;a class="link" href="https://fa21.cs161.org/proj2/threat_model.html#datastore-adversary" target="_blank" rel="noopener"
+>文档&lt;/a>这个项目要用到go语言，因为我之前对于go并不是很熟悉，这几天简单的过了一边go的语法。这个项目目前对于我的难点是&lt;/p>
+&lt;ul>
+&lt;li>课程的一些密码学的知识还没学完&lt;/li>
+&lt;li>英文文档的阅读可能需要多花费一些时间&lt;/li>
+&lt;li>要熟悉一下框架代码
+因为自己的进度是在太慢了，所以我必须动起手来边做项目边学习课程内容了。
+不过通过这几天对文档和代码的阅读，基本上有了一个大概的了解。首先，我将分析一下这个项目可能会遭受到的几种不同攻击，以及我该怎样去防御（目前只能是大概，随着我对项目的熟悉会逐渐完善，应该用不了几天）。&lt;/li>
+&lt;/ul>
+&lt;h3 id="可能遭受的攻击">可能遭受的攻击
+&lt;/h3>&lt;h4 id="篡改存储库的数据">篡改存储库的数据
+&lt;/h4>&lt;h4 id="修改已有数据">修改已有数据
+&lt;/h4>&lt;h4 id="被取消访问文件权限的用户仍然可以绕过客户端访问文件">被取消访问文件权限的用户仍然可以绕过客户端访问文件
+&lt;/h4>&lt;p>(x×y)modm=((xmodm)×(ymodm))modm&lt;/p>
+&lt;p>cd≡(me)d≡med≡m1+kϕ(n)≡m⋅(mϕ(n))k≡m⋅1k≡m(modn)&lt;/p></description></item><item><title>Links</title><link>https://hengyuss.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hengyuss.github.io/links/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
 &lt;p>This page&amp;rsquo;s frontmatter:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
