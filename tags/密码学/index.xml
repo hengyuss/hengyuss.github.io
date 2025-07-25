@@ -1,128 +1,108 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>密码学 on hengyu</title>
-        <link>http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/</link>
-        <description>Recent content in 密码学 on hengyu</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
-        <copyright>Example Person</copyright>
-        <lastBuildDate>Fri, 25 Jul 2025 18:52:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>密码学</title>
-        <link>http://localhost:1313/p/%E5%AF%86%E7%A0%81%E5%AD%A6/</link>
-        <pubDate>Fri, 25 Jul 2025 18:52:39 +0800</pubDate>
-        
-        <guid>http://localhost:1313/p/%E5%AF%86%E7%A0%81%E5%AD%A6/</guid>
-        <description>&lt;h2 id=&#34;密码学概述&#34;&gt;密码学概述
-&lt;/h2&gt;&lt;p&gt;密码常用于加密通话双方之间的信息，防止第三方得知通话双方之间的通话内容，保证数据的安全。
-密码学有两个很重要的特性，&lt;strong&gt;完整性&lt;/strong&gt; ，&lt;strong&gt;机密性&lt;/strong&gt; 。
-常见的加密算法又可分为&lt;strong&gt;对称加密&lt;/strong&gt; 和&lt;strong&gt;非对称加密&lt;/strong&gt;
-下面我会以我的理解解释这写内容，如理解有误，后续我会更改。&lt;/p&gt;
-&lt;h3 id=&#34;完整性&#34;&gt;完整性
-&lt;/h3&gt;&lt;p&gt;完整性是指接收方受到的信息不能被篡改过，收到的信息就是原来发送方所发送的信息。但是我们的加密信息毕竟是在不安全的信道内传输的，一定会有被篡改的风险。那么完整性岂不是永远都不能保证了？其实如果我们能够在接收到信息的时候有办法验证到这个信息被篡改过了，那么其实也算是保证了完整性，因为我们能识别哪些信息被篡改了，哪些信息是完整的。&lt;/p&gt;
-&lt;h3 id=&#34;机密性&#34;&gt;机密性
-&lt;/h3&gt;&lt;p&gt;机密性是指数据在传输过程中，第三方不能够知道任何关于此数据的信息，比如，如果在对称加密中，加密算法是用同一个key对消息进行异或处理后加密，那么加密消息的输出就是固定的，两次同样的消息内容加密后的内容是固定，这样，攻击者如果在不安全的信道内获得了者两段内容就会知道，哦，发送方给接收方发送了两次相同的内容，这样也算是攻击者从发送的加密信息中获得了一定的可用数据，那么这样的加密算法就无法保证机密性了。&lt;/p&gt;
-&lt;h3 id=&#34;对称加密&#34;&gt;对称加密
-&lt;/h3&gt;&lt;p&gt;对称加密简单来说是指发送方和接收方两者使用共同的密钥对内容进行加密和解密。
-首先，如果我们简单的使用双方共有的密钥进行加密。那么会有两个问题&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果加密算法简单(例如在机密性中举例过的异或)，那么数据的机密性就不能保证
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>密码学 on hengyu</title><link>https://hengyuss.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/</link><description>Recent content in 密码学 on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Fri, 25 Jul 2025 18:52:39 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/index.xml" rel="self" type="application/rss+xml"/><item><title>密码学</title><link>https://hengyuss.github.io/p/%E5%AF%86%E7%A0%81%E5%AD%A6/</link><pubDate>Fri, 25 Jul 2025 18:52:39 +0800</pubDate><guid>https://hengyuss.github.io/p/%E5%AF%86%E7%A0%81%E5%AD%A6/</guid><description>&lt;h2 id="密码学概述">密码学概述
+&lt;/h2>&lt;p>密码常用于加密通话双方之间的信息，防止第三方得知通话双方之间的通话内容，保证数据的安全。
+密码学有两个很重要的特性，&lt;strong>完整性&lt;/strong> ，&lt;strong>机密性&lt;/strong> 。
+常见的加密算法又可分为&lt;strong>对称加密&lt;/strong> 和&lt;strong>非对称加密&lt;/strong>
+下面我会以我的理解解释这写内容，如理解有误，后续我会更改。&lt;/p>
+&lt;h3 id="完整性">完整性
+&lt;/h3>&lt;p>完整性是指接收方受到的信息不能被篡改过，收到的信息就是原来发送方所发送的信息。但是我们的加密信息毕竟是在不安全的信道内传输的，一定会有被篡改的风险。那么完整性岂不是永远都不能保证了？其实如果我们能够在接收到信息的时候有办法验证到这个信息被篡改过了，那么其实也算是保证了完整性，因为我们能识别哪些信息被篡改了，哪些信息是完整的。&lt;/p>
+&lt;h3 id="机密性">机密性
+&lt;/h3>&lt;p>机密性是指数据在传输过程中，第三方不能够知道任何关于此数据的信息，比如，如果在对称加密中，加密算法是用同一个key对消息进行异或处理后加密，那么加密消息的输出就是固定的，两次同样的消息内容加密后的内容是固定，这样，攻击者如果在不安全的信道内获得了者两段内容就会知道，哦，发送方给接收方发送了两次相同的内容，这样也算是攻击者从发送的加密信息中获得了一定的可用数据，那么这样的加密算法就无法保证机密性了。&lt;/p>
+&lt;h3 id="对称加密">对称加密
+&lt;/h3>&lt;p>对称加密简单来说是指发送方和接收方两者使用共同的密钥对内容进行加密和解密。
+首先，如果我们简单的使用双方共有的密钥进行加密。那么会有两个问题&lt;/p>
+&lt;ul>
+&lt;li>如果加密算法简单(例如在机密性中举例过的异或)，那么数据的机密性就不能保证
 ye- 如何在不安全的信道内传输共享的密钥
-为了保证对称加密中的数据机密性，那么我们就需要引入一些随机量。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;aes加密&#34;&gt;AES加密
-&lt;/h4&gt;&lt;p&gt;AES加密是一种能够对抗暴力破解和保证机密性的对称加密算法。
+为了保证对称加密中的数据机密性，那么我们就需要引入一些随机量。&lt;/li>
+&lt;/ul>
+&lt;h4 id="aes加密">AES加密
+&lt;/h4>&lt;p>AES加密是一种能够对抗暴力破解和保证机密性的对称加密算法。
 AES加密会将数据分为16字节的数j据块，如果不够的话进行相应的填充，明文相当于品好的乐高模型，密钥就相当于说明书。明文会按照说明书进行多次打乱，旋转，替换，将密文生成为一堆看似杂乱无章的模型。
 这些过程实际上是一系列的数学变换，包括字节替换，列混淆，行移位，轮密钥加密等过程，论密钥就是从主密钥生成的对应轮数的密钥(如果加密过程有11轮，那么就有11个轮密钥)。
 解密过程就是将这些过程逆过来，即使攻击者知道aes的加密过程，暴力破解的话，拿128位密钥来说也要2的128次方的尝试，需要很久的时间。
-但是这样同样的明文经过相同的密钥不是会产生相同的输出吗？所以为了解决这个问题，AES在初始加密过程中会 引入随机向量，也就是每次加密过程中的随机向量都是随机的，这样就解决了相同的输入会出现相同输出的问题。&lt;/p&gt;
-&lt;h4 id=&#34;不安全信道内传输密钥-diffie-hellman密钥交换&#34;&gt;不安全信道内传输密钥-Diffie-Hellman密钥交换
-&lt;/h4&gt;&lt;p&gt;因为通信双方举例的原因，双方不能够通过线下安全的信道传输密钥，仅能在互联网中不安全的信道传输密钥，那么如何保证密钥不会被第三方得知呢？diffie-hellman算法就是用来解决这个问题的
+但是这样同样的明文经过相同的密钥不是会产生相同的输出吗？所以为了解决这个问题，AES在初始加密过程中会 引入随机向量，也就是每次加密过程中的随机向量都是随机的，这样就解决了相同的输入会出现相同输出的问题。&lt;/p>
+&lt;h4 id="不安全信道内传输密钥-diffie-hellman密钥交换">不安全信道内传输密钥-Diffie-Hellman密钥交换
+&lt;/h4>&lt;p>因为通信双方举例的原因，双方不能够通过线下安全的信道传输密钥，仅能在互联网中不安全的信道传输密钥，那么如何保证密钥不会被第三方得知呢？diffie-hellman算法就是用来解决这个问题的
 这个算法基于一个离散对数问题的难解性(我没有学过离散数学，接受这个概念就行)
-即  y = $g^2$ (mod p) 已知 y, g, p 求x。总之接受这个x很难求就是了。
-接下来解释该算法的步骤&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;参数&lt;/strong&gt; ：
+即 y = $g^2$ (mod p) 已知 y, g, p 求x。总之接受这个x很难求就是了。
+接下来解释该算法的步骤&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>参数&lt;/strong> ：
 选择一个大素数p(公开）
-选择一个生成元g(公开，1 &amp;lt; g &amp;lt; p)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;步骤&lt;/strong&gt;
+选择一个生成元g(公开，1 &amp;lt; g &amp;lt; p)&lt;/li>
+&lt;li>&lt;strong>步骤&lt;/strong>
 发送方选择私钥a(随机数)，计算公钥A = $g^2$ (mod p ) 发送给接收方
-接收方选择私钥b(随机数)， 计算公钥B = $g^2$  (mod p) 发送给发送方&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;结果&lt;/strong&gt;
+接收方选择私钥b(随机数)， 计算公钥B = $g^2$ (mod p) 发送给发送方&lt;/li>
+&lt;li>&lt;strong>结果&lt;/strong>
 (x * y)mod m=((x mod m)×(y mod m))mod m
 发送方计算密钥 s = $B^a$ mod p
 接收方计算密钥 s = $A^b$ mod p
-结果相同 s = $g^ab$  mod p
-，&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;非对称加密&#34;&gt;非对称加密
-&lt;/h3&gt;&lt;p&gt;非对称加密简单来说就是加密所用的密钥和解密所用的密钥不同。
+结果相同 s = $g^ab$ mod p
+，&lt;/li>
+&lt;/ul>
+&lt;h3 id="非对称加密">非对称加密
+&lt;/h3>&lt;p>非对称加密简单来说就是加密所用的密钥和解密所用的密钥不同。
 非对称加密算法会生成一对密钥，即公钥和私钥，公钥会公布给所有人，如果有人想要和我通信就用这个公钥加密内容。私钥由用户个人保存.
-非对称加密解密的过程其实和Diffie-Hellman密钥交换 相似&lt;/p&gt;
-&lt;h4 id=&#34;rsa加密&#34;&gt;RSA加密
-&lt;/h4&gt;&lt;p&gt;RSA依赖一下数学定理&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;​&lt;strong&gt;​模运算（Modular Arithmetic）​&lt;/strong&gt;​：计算大数在模数下的余数。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;​&lt;strong&gt;​欧拉定理​&lt;/strong&gt;​：若 a与 n互质，则 $a^ϕ(n)$ = 1( mod n )，其中 ϕ(n)是欧拉函数。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;​&lt;strong&gt;​大数分解难题​&lt;/strong&gt;​：将 n=p×q（大素数乘积）分解为 p和 q极其困难。
-rsa 会先生成一个公钥和私钥，以下是生成密钥的步骤&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;选择两个大素数
+非对称加密解密的过程其实和Diffie-Hellman密钥交换 相似&lt;/p>
+&lt;h4 id="rsa加密">RSA加密
+&lt;/h4>&lt;p>RSA依赖一下数学定理&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>​&lt;strong>​模运算（Modular Arithmetic）​&lt;/strong>​：计算大数在模数下的余数。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>​&lt;strong>​欧拉定理​&lt;/strong>​：若 a与 n互质，则 $a^ϕ(n)$ = 1( mod n )，其中 ϕ(n)是欧拉函数。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>​&lt;strong>​大数分解难题​&lt;/strong>​：将 n=p×q（大素数乘积）分解为 p和 q极其困难。
+rsa 会先生成一个公钥和私钥，以下是生成密钥的步骤&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>选择两个大素数
 p = 61 (举例说明)
-q = 53&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;计算模数n
-n = p * q = 3233&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;计算欧拉函数
-ϕ(n)=(p−1)(q−1)=60×52=3120&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;ϕ(n)用于生成私钥&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;选择公钥指数e
+q = 53&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>计算模数n
+n = p * q = 3233&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>计算欧拉函数
+ϕ(n)=(p−1)(q−1)=60×52=3120&lt;/p>
+&lt;ul>
+&lt;li>ϕ(n)用于生成私钥&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>选择公钥指数e
 1&amp;lt;e&amp;lt;ϕ(n)。
 e与 ϕ(n)互质（即 gcd(e,ϕ(n))=1）。
-e=17(示例) 这里选择e=17作为演示&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;计算私钥指数d
-d是 e在模 ϕ(n)下的乘法逆元：&lt;/p&gt;
-&lt;p&gt;d= $e^-1$  ( mod ϕ(n))&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;即解方程 e⋅d= 1 ( mod ϕ(n))。&lt;/p&gt;
-&lt;p&gt;使用扩展欧几里得算法求解：&lt;/p&gt;
-&lt;p&gt;17×d≡1( mod 3120)⟹d = 2753&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;最终密钥对
-&lt;strong&gt;公钥​&lt;/strong&gt;​：(e,n)=(17,3233)。&lt;/p&gt;
-&lt;p&gt;​&lt;strong&gt;​私钥​&lt;/strong&gt;​：(d,n)=(2753,3233)。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;rsa加密解密过程&#34;&gt;RSA加密解密过程
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;明文 m​&lt;/strong&gt;​：需满足 0≤m&amp;lt;n（若明文较长，需分块加密）。
-&lt;strong&gt;加密公式​&lt;/strong&gt;​：c = $m^e$ (mod n)&lt;/p&gt;
-&lt;p&gt;​&lt;strong&gt;​示例​&lt;/strong&gt;​：加密 m=65（ASCII字符 &lt;code&gt;&#39;A&#39;&lt;/code&gt;）：&lt;/p&gt;
-&lt;p&gt;c= 6517 mod 3233 = 2790&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解密公式​&lt;/strong&gt;​：&lt;/p&gt;
-&lt;p&gt;私钥 d满足 ed = 1 ( mod ϕ(n))，即 ed = 1 + kϕ(n)。
-$m^{ϕ(n)}$ ≡1 ( mod n)&lt;/p&gt;
-&lt;p&gt;m = $c^d$ ( mod n)  = $m^{ed}$  ≡ $m^{1+kϕ(n)}$  = m⋅  $m^{kϕ(n)}$ ≡m⋅ $1^k$  = m ( mod n)&lt;/p&gt;
-&lt;p&gt;​&lt;strong&gt;​示例​&lt;/strong&gt;​：解密 c = 2790：&lt;/p&gt;
-&lt;p&gt;m=27902753 mod 3233 = 65(还原明文)&lt;/p&gt;
-</description>
-        </item>
-        
-    </channel>
-</rss>
+e=17(示例) 这里选择e=17作为演示&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>计算私钥指数d
+d是 e在模 ϕ(n)下的乘法逆元：&lt;/p>
+&lt;p>d= $e^-1$ ( mod ϕ(n))&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>即解方程 e⋅d= 1 ( mod ϕ(n))。&lt;/p>
+&lt;p>使用扩展欧几里得算法求解：&lt;/p>
+&lt;p>17×d≡1( mod 3120)⟹d = 2753&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>最终密钥对
+&lt;strong>公钥​&lt;/strong>​：(e,n)=(17,3233)。&lt;/p>
+&lt;p>​&lt;strong>​私钥​&lt;/strong>​：(d,n)=(2753,3233)。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h5 id="rsa加密解密过程">RSA加密解密过程
+&lt;/h5>&lt;p>&lt;strong>明文 m​&lt;/strong>​：需满足 0≤m&amp;lt;n（若明文较长，需分块加密）。
+&lt;strong>加密公式​&lt;/strong>​：c = $m^e$ (mod n)&lt;/p>
+&lt;p>​&lt;strong>​示例​&lt;/strong>​：加密 m=65（ASCII字符 &lt;code>'A'&lt;/code>）：&lt;/p>
+&lt;p>c= 6517 mod 3233 = 2790&lt;/p>
+&lt;p>&lt;strong>解密公式​&lt;/strong>​：&lt;/p>
+&lt;p>私钥 d满足 ed = 1 ( mod ϕ(n))，即 ed = 1 + kϕ(n)。
+$m^{ϕ(n)}$ ≡1 ( mod n)&lt;/p>
+&lt;p>m = $c^d$ ( mod n) = $m^{ed}$ ≡ $m^{1+kϕ(n)}$ = m⋅ $m^{kϕ(n)}$ ≡m⋅ $1^k$ = m ( mod n)&lt;/p>
+&lt;p>​&lt;strong>​示例​&lt;/strong>​：解密 c = 2790：&lt;/p>
+&lt;p>m=27902753 mod 3233 = 65(还原明文)&lt;/p></description></item></channel></rss>
