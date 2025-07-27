@@ -95,7 +95,7 @@ E[ ]
 end
 EBP((("EBP"))) --> A
 ESP((("ESP"))) --> D
-D --> address((("add $8, %esp")))
+D --> address((("add \$8, \%esp")))
 style caller_stack_frame #stroke:#333
 style EBP stroke:#222
 style ESP stroke:#222`</div><p>接下来要将原来的栈顶地址入栈，因为接下来的栈就是callee的栈了<div class=mermaid align=left>flowchart LR
@@ -109,7 +109,7 @@ E[address of caller stack frame ]
 end
 direction TB
 EBP((("EBP"))) --> ESP((("ESP"))) -->E
-D --> address1((("add $8, %esp")))
+D --> address1((("add \$8, \%esp")))
 style caller_stack_frame #stroke:#333
 style EBP stroke:#222
 style ESP stroke:#222`</div></p><p>在执行callee的过程和caller类似，这里我们主要说执行callee后的返回过程.在callee中可以看到 pop %ebp，是将栈低 caller stack frame的地址也就是原来caller的栈顶地址弹入到ebp中，然后此时esp就指向了address of add %8, %esp</p><div class=mermaid align=left>flowchart LR
@@ -124,7 +124,7 @@ end
 direction TB
 EBP((("EBP"))) --> A
 ESP((("ESP"))) --> D
-D --> address1((("add $8, %esp")))
+D --> address1((("add \$8, \%esp")))
 style caller_stack_frame #stroke:#333
 style EBP stroke:#222
 style ESP stroke:#222`</div><p>在然后执行ret 汇编代码，将esp所指向的内存地址弹入到eip中也就是add $8, %esp这条命令,cpu 开始从这条命令执行，这条命令的意思就是将esp向上再升两个刚好跨过两个参数1,2的内存地址，epb=esp此时栈就被释放了。(为什么是add $8, %esl, 因为我们说的是32位的系统，每个内存地址是32位也就是4个字节，1,2两个参数分别占一个内存地址因此是两个内存地址也就是8个字节)</p><h3 id=额外知识>额外知识</h3><p>在写博客的途中学到的知识</p><h4 id=hugo集成mermaid>hugo集成mermaid</h4><p>我使用的是hugo-theme-stack主题，如果要使用mermaid，我在网上找了很多方法，其中比较有用的是在shortcode目录下添加mermaid.html文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1

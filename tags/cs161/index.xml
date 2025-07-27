@@ -1891,7 +1891,7 @@ E[ ]
 end
 EBP((("EBP"))) --> A
 ESP((("ESP"))) --> D
-D --> address((("add $8, %esp")))
+D --> address((("add \$8, \%esp")))
 style caller_stack_frame #stroke:#333
 style EBP stroke:#222
 style ESP stroke:#222`
@@ -1909,7 +1909,7 @@ E[address of caller stack frame ]
 end
 direction TB
 EBP((("EBP"))) --> ESP((("ESP"))) -->E
-D --> address1((("add $8, %esp")))
+D --> address1((("add \$8, \%esp")))
 style caller_stack_frame #stroke:#333
 style EBP stroke:#222
 style ESP stroke:#222`
@@ -1928,7 +1928,7 @@ end
 direction TB
 EBP((("EBP"))) --> A
 ESP((("ESP"))) --> D
-D --> address1((("add $8, %esp")))
+D --> address1((("add \$8, \%esp")))
 style caller_stack_frame #stroke:#333
 style EBP stroke:#222
 style ESP stroke:#222`
