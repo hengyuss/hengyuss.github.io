@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>School on hengyu</title><link>https://hengyuss.github.io/tags/school/</link><description>Recent content in School on hengyu</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Example Person</copyright><lastBuildDate>Fri, 05 Sep 2025 11:53:39 +0800</lastBuildDate><atom:link href="https://hengyuss.github.io/tags/school/index.xml" rel="self" type="application/rss+xml"/><item><title>2025暑假总结</title><link>https://hengyuss.github.io/p/2025%E6%9A%91%E5%81%87%E6%80%BB%E7%BB%93/</link><pubDate>Fri, 05 Sep 2025 11:53:39 +0800</pubDate><guid>https://hengyuss.github.io/p/2025%E6%9A%91%E5%81%87%E6%80%BB%E7%BB%93/</guid><description>&lt;h2 id="2025暑假总结"&gt;2025暑假总结
+&lt;/h2&gt;&lt;h3 id="学习内容"&gt;学习内容
+&lt;/h3&gt;&lt;h4 id="cs161"&gt;cs161
+&lt;/h4&gt;&lt;p&gt;首先是根据实验室方向内容，我选择学习了cs161这门课，不过受限于自己在家的学习效率，我只完成了计算机安全和密码学相关的内容,课程当中的project也只是完成了project2相关的内容，使用go语言构建一个安全文件系统。相关的学习笔记以及代码都可以在&lt;a class="link" href="https://hengyuss.github.io/tags/cs161/" target="_blank" rel="noopener"
+&gt;cs161笔记&lt;/a&gt; 中找到。&lt;/p&gt;
+&lt;h3 id="读书"&gt;读书
+&lt;/h3&gt;&lt;p&gt;暑假期间读了一下《代码整洁之道》，因为之前的工作中，组内对代码质量要求也比较高，而我当时也刚刚是从自学过度到工作阶段，许多编码方面的要点以及思维方面并不是很跟得上，经过这两年的代码编写经验才勉强算是初窥内径​，这是需要大量编码经验和内功的知识以及需要贯穿到整个职业生涯的。但是《代码整洁之道》中的各项条例并不能全部被奉为圭臬，对于我这种初级程序员，它有很好的参考价值，但是需要辩证的去看待个中规则。&lt;/p&gt;
+&lt;h2 id="反思"&gt;反思
+&lt;/h2&gt;&lt;h3 id="暑期学习效率"&gt;暑期学习效率
+&lt;/h3&gt;&lt;p&gt;暑期的学习效率不高&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;6-7月份
+学习效率还可以，基本上平均一周有3-4天会去图书馆学上一段时间，我在暑期做的大部分内容也是这段时间内完成的。&lt;/li&gt;
+&lt;li&gt;8月份
+这段时间已经算是在摆烂了，因为同时这段时间在做家教，每天都有课，下班之后就不想再学习了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总的来说我还是喜欢在有学习氛围的地方学习，效率会高一点，自己一个人的话在自制力这方面可能会薄弱一点。&lt;/p&gt;
+&lt;h3 id="动手能力"&gt;动手能力
+&lt;/h3&gt;&lt;p&gt;我个人觉得代码这种东西必须要有空就敲一敲，不然，过一段时间就会生疏，虽然我现在的思维可能比工作的时候有一点点进步，但是现在的动手能力是有点欠缺的，不过，之后多敲一点应该很快就能重新找到感觉的，比如现在每天都要敲一定量的代码。
+系统我也从windows过度到linux了，虽然linux现在的生态还是远不及windows，但是已经方便许多了，完全能够胜任日常使用了，而且我用的是arch，它的文档足够丰富，我遇到的问题基本都能够在官方文档中找到解决办法，另一方面，我在windos中已经使用相当长一段时间wsl了。&lt;/p&gt;
+&lt;h2 id="计划"&gt;计划
+&lt;/h2&gt;&lt;p&gt;对于新学期的计划，只能根据我目前所学的内容有一个大概的方向。后续会在该页面详细补充到每天要完成的那种，因为这样有一个量的话我比较容易执行，否则的话会很容易把计划当作是一个让老师看的废稿。&lt;/p&gt;
+&lt;h3 id="rust"&gt;rust
+&lt;/h3&gt;&lt;p&gt;目前rust还在学习阶段，不过每天都在看文档和敲一些rust代码，熟悉相关语法，因为rust相比其他语言来说有许多新的概念，不过就目前来说还算好理解。目前就打算先是把rust基础语法练习搞完，然后看一下RustCryptoUtilities这个库。
+因为现在处于基础学习阶段就先制定一下基础学习的量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每天至少三小节rust相关内容的学习&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="读书-1"&gt;读书
+&lt;/h3&gt;&lt;p&gt;书还是要读的，各种计算机方面的内容的，我暂时打算把计算节方面饱受盛名的书拿来读一读，就先从《代码大全》开始吧。就按照我当初自学那段日子的计划来吧。啃书！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每天50页(视情况而定吧，不过最少应该是30页，因为当时是空闲的一整天才能读50页)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="复盘"&gt;复盘
+&lt;/h3&gt;&lt;p&gt;现在越来越认识到学习过程当中复盘的重要性了，本来暑假的时候就打算每周要写两篇自己当周学习到的技术博客的，但是很显然因为自己的惰性给搁置了。希望这个学期在学校能够严格执行下去。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每周至少写两篇当周所学内容的博客&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>
